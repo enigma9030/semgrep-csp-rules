@@ -1,0 +1,115 @@
+rules:
+- id: Finding-of-eval-function
+  patterns:
+    - pattern-either:
+      - pattern: eval(...)
+      - pattern: eval("...")
+  message: Found eval function of JavaScript
+  languages:
+    - js
+    - ts
+  severity: INFO
+  metadata: 
+      category: correctness
+
+- id: Finding-of-script-block
+  patterns: 
+    - pattern: <script>...</script>
+  message: Found the <script> block
+  languages:
+    - ts
+    - js
+    - html
+  severity: INFO
+  metadata:
+    category: correctness
+
+- id: Finding-of-js-event-handlers
+  patterns:
+    - pattern-either:
+        - pattern: $VAR.$EVENTHANDLER(...)
+    - metavariable-regex:
+        metavariable: '$EVENTHANDLER'
+        regex: '.*(onAbort|onBlur|onChange|onClick|onDblClick|onDragDrop|onError|onFocus|onKeyDown|onKeyPress|onKeyUp|onLoad|onMouseDown|onMouseMove|onMouseOut|onMouseOver|onMouseUp|onMove|onReset|onResize|onSelect|onSubmit|onUnload).*'
+  message: Found the JS event Finding-of-js-event-handler
+  languages:
+    - js
+    - ts
+  severity: INFO
+  metadata:
+    category: correctness
+
+
+- id: Finding-of-js-pseudo-tag
+  patterns:
+    - pattern-either:
+        - pattern: "javascript: ..."
+  message: Found javascript pseudo tag 
+  languages:
+    - ts
+    - js
+  severity: INFO
+  metadata:
+    category: correctness
+
+- id: Finding-of-js-setTimeout-or-clearTimeout-function
+  patterns:
+    - pattern-either:
+      - pattern: setTimeout(..., $X, ...)
+      - pattern: clearTimeout(...)
+  message: Found JS setTimeout or clearTimeout method
+  languages:
+    - ts
+    - js
+  severity: INFO
+  metadata:
+    category: correctness
+
+- id: Finding-of-js-setInterval-or-clearInterval-function
+  patterns:
+    - pattern-either:
+      - pattern: setInterval($X, ... , ...)
+      - pattern: clearInterval(...)
+  message: Found JS setInterval or clearInterval method
+  languages:
+    - ts
+    - js
+  severity: INFO
+  metadata:
+    category: correctness
+
+- id: Finding-of-js-new-function-constructor
+  patterns:
+    - pattern-either:
+      - pattern: $X = new Function(...)
+  message: Found new Function constructor call
+  languages:
+    - ts
+    - js
+  severity: INFO
+  metadata:
+    category: correctness
+
+- id: Finding-of-style-block-in-the-files
+  patterns: 
+    - pattern: <style>...</style>
+  message: Found the <style> block
+  languages:
+    - ts
+    - js
+    - html
+  severity: INFO
+  metadata:
+    category: correctness
+
+- id: Finding-of-inline-style-attributes
+  patterns:
+    - pattern: style= ...
+  message: Found the style attribute
+  languages:
+    - ts
+    - js
+    - html
+  severity: INFO
+  metadata:
+    category: correctness
